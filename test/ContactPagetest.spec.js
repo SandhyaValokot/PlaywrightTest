@@ -3,90 +3,90 @@
 
 const { test, expect } = require('@playwright/test');
 const config = require ('./config.json')
-// test('Verify Title of Jupiter Toys Homepage', async ({ page }) => {
+test('Verify Title of Jupiter Toys Homepage', async ({ page }) => {
 
-//     await page.goto('http://jupiter.cloud.planittesting.com');
+    await page.goto('http://jupiter.cloud.planittesting.com');
 
-//     const pageTitle = await page.title()
-//     console.log('Page title is:', pageTitle);
-//     await expect(page).toHaveTitle('Jupiter Toys');
-
-
-
-// })
-
-// test('Verify error message is coming when user skip the mandatory fields', async ({ page }) => {
-
-//     await page.goto('http://jupiter.cloud.planittesting.com');
-
-//     await page.locator('id=nav-contact').click();
-//     await page.getByRole("link", { name: "Submit" }).click()
-//     let firstnameerror = await page.locator("id=forename-err").textContent();
-//     expect(firstnameerror).toEqual("Forename is required")
-
-//     let emailaddresserror = await page.locator("id=email-err").textContent()
-//     expect(emailaddresserror).toEqual("Email is required")
-//     let messageerror = await page.locator("id=message-err").textContent()
-//     expect(messageerror).toEqual("Message is required")
-
-//     let status = await page.locator("text=We welcome your feedback").isVisible()
-//     expect(status).toBeTruthy()
-//     let status2 = await page.locator("text= - but we won't get it unless you complete the form correctly.").isVisible()
-//     expect(status2).toBeTruthy()
-
-
-// })
-
-
-// test('Verify error message is no longer available when user enters the mandatory fields', async ({ page }) => {
-
-//     await page.goto('http://jupiter.cloud.planittesting.com');
-
-//     await page.locator('id=nav-contact').click();
-//     await page.getByRole("link", { name: "Submit" }).click()
-//     await page.locator('id=forename').fill("Sandy");
-//     let firstnameerror = await page.locator("id=forename-err").isVisible()
-//     expect(firstnameerror).toBeFalsy()
-
-//     await page.locator('id=email').fill("Sandy.valokot@gmail.com");
-//     let emailaddresserror = await page.locator("id=email-err").isVisible()
-//     expect(emailaddresserror).toBeFalsy()
-
-//     await page.locator('id=message').fill("Test123");
-//     let messageerror = await page.locator("id=message-err").isVisible()
-//     expect(messageerror).toBeFalsy()
-
-
-// })
+    const pageTitle = await page.title()
+    console.log('Page title is:', pageTitle);
+    await expect(page).toHaveTitle('Jupiter Toys');
 
 
 
-// test('Verify User is able to Submit the details', async ({ page }) => {
+})
 
-//     await page.goto('http://jupiter.cloud.planittesting.com');
+test('Verify error message is coming when user skip the mandatory fields', async ({ page }) => {
 
-//     await page.locator('id=nav-contact').click();
-//     await page.getByRole("link", { name: "Submit" }).click()
-//     await page.locator('id=forename').fill("Sandy");
-//     let firstnameerror = await page.locator("id=forename-err").isVisible()
-//     expect(firstnameerror).toBeFalsy()
+    await page.goto('http://jupiter.cloud.planittesting.com');
 
-//     await page.locator('id=email').fill("Sandy.valokot@gmail.com");
-//     let emailaddresserror = await page.locator("id=email-err").isVisible()
-//     expect(emailaddresserror).toBeFalsy()
+    await page.locator('id=nav-contact').click();
+    await page.getByRole("link", { name: "Submit" }).click()
+    let firstnameerror = await page.locator("id=forename-err").textContent();
+    expect(firstnameerror).toEqual("Forename is required")
 
-//     await page.locator('id=message').fill("Test123");
-//     let messageerror = await page.locator("id=message-err").isVisible()
-//     expect(messageerror).toBeFalsy()
+    let emailaddresserror = await page.locator("id=email-err").textContent()
+    expect(emailaddresserror).toEqual("Email is required")
+    let messageerror = await page.locator("id=message-err").textContent()
+    expect(messageerror).toEqual("Message is required")
 
-//     await page.getByRole("link", { name: "Submit" }).click()
-//     await page.waitForTimeout(5000)
-//     let received = await page.locator("text=Thanks Sandy")
-//     await expect(received).toBeVisible({ timeout: 30000 })
-//     let status2 = await page.locator("text=, we appreciate your feedback.").isVisible()
-//     expect(status2).toBeTruthy()
+    let status = await page.locator("text=We welcome your feedback").isVisible()
+    expect(status).toBeTruthy()
+    let status2 = await page.locator("text= - but we won't get it unless you complete the form correctly.").isVisible()
+    expect(status2).toBeTruthy()
 
-// })
+
+})
+
+
+test('Verify error message is no longer available when user enters the mandatory fields', async ({ page }) => {
+
+    await page.goto('http://jupiter.cloud.planittesting.com');
+
+    await page.locator('id=nav-contact').click();
+    await page.getByRole("link", { name: "Submit" }).click()
+    await page.locator('id=forename').fill("Sandy");
+    let firstnameerror = await page.locator("id=forename-err").isVisible()
+    expect(firstnameerror).toBeFalsy()
+
+    await page.locator('id=email').fill("Sandy.valokot@gmail.com");
+    let emailaddresserror = await page.locator("id=email-err").isVisible()
+    expect(emailaddresserror).toBeFalsy()
+
+    await page.locator('id=message').fill("Test123");
+    let messageerror = await page.locator("id=message-err").isVisible()
+    expect(messageerror).toBeFalsy()
+
+
+})
+
+
+
+test('Verify User is able to Submit the details', async ({ page }) => {
+
+    await page.goto('http://jupiter.cloud.planittesting.com');
+
+    await page.locator('id=nav-contact').click();
+    await page.getByRole("link", { name: "Submit" }).click()
+    await page.locator('id=forename').fill("Sandy");
+    let firstnameerror = await page.locator("id=forename-err").isVisible()
+    expect(firstnameerror).toBeFalsy()
+
+    await page.locator('id=email').fill("Sandy.valokot@gmail.com");
+    let emailaddresserror = await page.locator("id=email-err").isVisible()
+    expect(emailaddresserror).toBeFalsy()
+
+    await page.locator('id=message').fill("Test123");
+    let messageerror = await page.locator("id=message-err").isVisible()
+    expect(messageerror).toBeFalsy()
+
+    await page.getByRole("link", { name: "Submit" }).click()
+    await page.waitForTimeout(5000)
+    let received = await page.locator("text=Thanks Sandy")
+    await expect(received).toBeVisible({ timeout: 30000 })
+    let status2 = await page.locator("text=, we appreciate your feedback.").isVisible()
+    expect(status2).toBeTruthy()
+
+})
 
 test('Verify Total equals to sum of sub totals ', async ({ page }) => {
 
