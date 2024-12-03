@@ -2,7 +2,8 @@
 // import { test, expect } from '@playwright/test';
 
 const { test, expect } = require('@playwright/test');
-const config = require ('./config.json')
+const config = require ('./config.json');
+const userconfig = require ('./users.json');
 test('Verify Title of Jupiter Toys Homepage', async ({ page }) => {
 
     await page.goto('http://jupiter.cloud.planittesting.com');
@@ -60,34 +61,37 @@ test('Verify error message is no longer available when user enters the mandatory
 })
 
 
-
-test('Verify User is able to Submit the details', async ({ page }) => {
-
-    await page.goto('http://jupiter.cloud.planittesting.com');
-
-    await page.locator('id=nav-contact').click();
-    await page.getByRole("link", { name: "Submit" }).click()
-    await page.locator('id=forename').fill("Sandy");
-    let firstnameerror = await page.locator("id=forename-err").isVisible()
-    expect(firstnameerror).toBeFalsy()
-
-    await page.locator('id=email').fill("Sandy.valokot@gmail.com");
-    let emailaddresserror = await page.locator("id=email-err").isVisible()
-    expect(emailaddresserror).toBeFalsy()
-
-    await page.locator('id=message').fill("Test123");
-    let messageerror = await page.locator("id=message-err").isVisible()
-    expect(messageerror).toBeFalsy()
-
-    await page.getByRole("link", { name: "Submit" }).click()
-    await page.waitForTimeout(5000)
-    let received = await page.locator("text=Thanks Sandy")
-    await expect(received).toBeVisible({ timeout: 30000 })
-    let status2 = await page.locator("text=, we appreciate your feedback.").isVisible()
-    expect(status2).toBeTruthy()
-
-})
-
+test.describe('Iterative Validation', () => {
+    test.setTimeout(120000); 
+    test('Verify Users are able to Submit the details', async ({ page }) => {
+        for (const { firstname, email, message } of userconfig.user) {
+            await page.goto('http://jupiter.cloud.planittesting.com');
+        
+            await page.locator('id=nav-contact').click();
+            await page.getByRole("link", { name: "Submit" }).click();
+            
+            await page.locator('id=forename').fill(firstname);
+            let firstnameerror = await page.locator("id=forename-err").isVisible();
+            expect(firstnameerror).toBeFalsy();
+        
+            await page.locator('id=email').fill(email);
+            let emailaddresserror = await page.locator("id=email-err").isVisible();
+            expect(emailaddresserror).toBeFalsy();
+        
+            await page.locator('id=message').fill(message);
+            let messageerror = await page.locator("id=message-err").isVisible();
+            expect(messageerror).toBeFalsy();
+        
+            await page.getByRole("link", { name: "Submit" }).click();
+            await page.waitForTimeout(3000);
+            
+            let received = await page.locator("text=Thanks Sandy");
+            await expect(received).toBeVisible({ timeout: 120000 });
+            let status2 = await page.locator("text=, we appreciate your feedback.").isVisible();
+            expect(status2).toBeTruthy();
+        }
+    });
+});
 test('Verify Total equals to sum of sub totals ', async ({ page }) => {
 
     await page.goto('http://jupiter.cloud.planittesting.com');
